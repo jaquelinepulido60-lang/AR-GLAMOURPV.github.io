@@ -1,0 +1,253 @@
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AR Glamour</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* FONDO GENERAL */
+body{
+  background: linear-gradient(135deg,#ff8fb1,#ffffff);
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* MENÚ */
+header{
+  background:black;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h1{
+  color:white;
+  letter-spacing:3px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#ff8fb1;
+}
+
+/* SECCIÓN PRINCIPAL */
+.hero{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero img{
+  width:200px;
+  margin-bottom:20px;
+  border-radius:50%;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero h2{
+  font-size:50px;
+  color:black;
+  letter-spacing:4px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:18px;
+  color:#333;
+  margin-bottom:30px;
+}
+
+/* BOTÓN */
+.btn{
+  background:black;
+  color:white;
+  padding:12px 30px;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:30px;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#ff8fb1;
+  color:black;
+}
+
+/* FOOTER */
+footer{
+  background:black;
+  color:white;
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+}
+
+/* MODAL CARRUSEL */
+.modal-carrusel {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 40px;
+}
+
+.carrusel-contenido {
+  position: relative;
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+}
+
+.carrusel-contenido video {
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff4f8b;
+  cursor: pointer;
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 50%;
+}
+
+.flecha.izquierda { left: -25px; }
+.flecha.derecha { right: -25px; }
+
+#descripcionCarrusel {
+  font-weight: bold;
+  color: #ff4f8b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>AR Glamour</h1>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="catalogo.html">Catálogo</a>
+    <a href="colecciones.html">Colecciones</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="imagenes/logo.JPG" alt="AR Glamour">
+  <h2>AR GLAMOUR</h2>
+  <p>Tienda de ropa • maquillaje • accesorios</p>
+
+  <!-- BOTÓN EXPLORAR VIDEOS -->
+  <button class="btn" onclick="abrirCarrusel()">Explorar Videos</button>
+</section>
+
+<!-- MODAL CARRUSEL DE VIDEOS -->
+<div id="carruselModal" class="modal-carrusel">
+  <div class="carrusel-contenido">
+    <span class="cerrar" onclick="cerrarCarrusel()">&times;</span>
+    <button class="flecha izquierda" onclick="cambiarVideo(-1)">&#10094;</button>
+
+    <video id="videoCarrusel" controls>
+      <source src="VIDEOS/VIDEO1.mp4" type="video/mp4">
+      Tu navegador no soporta videos HTML5.
+    </video>
+
+    <button class="flecha derecha" onclick="cambiarVideo(1)">&#10095;</button>
+    <p id="descripcionCarrusel">Video 1</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 AR Glamour | Moda femenina con estilo</p>
+</footer>
+
+<script>
+const videos = [
+  {src: "videos/VIDEO1.mp4", descripcion: "Video 1"},
+  {src: "videos/VIDEO2.mp4", descripcion: "Video 2"},
+  {src: "videos/VIDEO3.mp4", descripcion: "Video 3"},
+  {src: "videos/VIDEO4.mp4", descripcion: "Video 4"},
+  {src: "videos/VIDEO5.mp4", descripcion: "Video 5"}
+];
+
+let indiceActual = 0;
+
+function abrirCarrusel() {
+  document.getElementById("carruselModal").style.display = "flex";
+  mostrarVideo();
+}
+
+function cerrarCarrusel() {
+  document.getElementById("carruselModal").style.display = "none";
+}
+
+function cambiarVideo(n) {
+  indiceActual += n;
+  if (indiceActual < 0) indiceActual = videos.length - 1;
+  if (indiceActual >= videos.length) indiceActual = 0;
+  mostrarVideo();
+}
+
+function mostrarVideo() {
+  const video = document.getElementById("videoCarrusel");
+  const descripcion = document.getElementById("descripcionCarrusel");
+  video.src = videos[indiceActual].src;
+  descripcion.textContent = videos[indiceActual].descripcion;
+  video.play();
+}
+
+// Cerrar modal al hacer click fuera
+window.onclick = function(event) {
+  const modal = document.getElementById("carruselModal");
+  if (event.target === modal) cerrarCarrusel();
+}
+</script>
+</body>
+</html>

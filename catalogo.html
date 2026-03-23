@@ -1,0 +1,349 @@
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Catálogo | AR Glamour</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* HEADER */
+  header {
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: #ff7aa8;
+  }
+
+  /* TITULO */
+  .titulo {
+    text-align: center;
+    padding: 40px;
+    background: #ffe4ec;
+  }
+  .titulo h2 {
+    font-size: 35px;
+  }
+
+  /* CATALOGO */
+  .catalogo {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    padding: 20px 40px 40px 40px;
+  }
+
+  /* TARJETAS - Estilo como en tu imagen */
+  .producto {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+  }
+  .producto:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+  }
+
+  /* IMAGEN */
+  .producto img {
+    width: 100%;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: transform 0.3s ease;
+  }
+  .producto img:hover {
+    transform: scale(1.05);
+  }
+
+  /* FAVORITO */
+  .favorito {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 18px;
+    color: #ff4f8b;
+    cursor: pointer;
+  }
+
+  /* TEXTO */
+  .producto h3 {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #111;
+  }
+  .descripcion {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+    min-height: 40px;
+  }
+  .precio {
+    color: #ff4f8b;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  /* BOTON */
+  .btn {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .btn:hover {
+    background: #ff7aa8;
+  }
+
+  /* FOOTER */
+  footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+    position: relative;
+  }
+  .modal-content img {
+    width: 100%;
+    border-radius: 15px;
+  }
+  .cerrar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff4f8b;
+    cursor: pointer;
+  }
+
+  /* Responsive: que se adapte a pantallas pequeñas */
+  @media (max-width: 1200px) {
+    .catalogo {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+    }
+  }
+  @media (max-width: 800px) {
+    .catalogo {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .catalogo {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>AR Glamour</h1>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="catalogo.html">Catálogo</a>
+    <a href="colecciones.html">Colecciones</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+
+<section class="titulo">
+  <h2>Nuestro Catálogo</h2>
+</section>
+
+<section class="catalogo">
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/lentes.jpeg" alt="Lentes de Sol" onclick="abrirModal('IMAGENES/lentes.jpeg')" />
+    <h3>Lentes de Sol</h3>
+    <p class="descripcion">Lentes elegantes con protección UV ideales para cualquier outfit.</p>
+    <p class="precio">$250</p>
+    <div class="btn" onclick="abrirModal('imagenes/lentes.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/zapatillasb.jpeg" alt="Zapatillas Blancas" onclick="abrirModal('IMAGENES/zapatillasb.jpeg')" />
+    <h3>Zapatillas Blancas</h3>
+    <p class="descripcion">Zapatillas cómodas y modernas para uso diario.</p>
+    <p class="precio">$350</p>
+    <div class="btn" onclick="abrirModal('imagenes/zapatillasb.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/pañueleta1.jpeg" alt="Pañoleta" onclick="abrirModal('IMAGENES/pañueleta1.jpeg')" />
+    <h3>Pañoleta</h3>
+    <p class="descripcion">Hermoso accesorio para el cabello.</p>
+    <p class="precio">$100</p>
+    <div class="btn" onclick="abrirModal('imagenes/pañueleta1.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/vestidotonto.jpeg" alt="Vestido" onclick="abrirModal('IMAGENES/vestidotonto.jpeg')" />
+    <h3>Vestido</h3>
+    <p class="descripcion">Moderno y cómodo.</p>
+    <p class="precio">$400</p>
+    <div class="btn" onclick="abrirModal('imagenes/vestidotonto.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/conjuntorosa.jpeg" alt="Conjunto" onclick="abrirModal('IMAGENES/conjuntorosa.jpeg')" />
+    <h3>Conjunto</h3>
+    <p class="descripcion">Hermoso y moderno.</p>
+    <p class="precio">$500</p>
+    <div class="btn" onclick="abrirModal('imagenes/conjuntorosa.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/zapatillasp.jpeg" alt="Zapatillas Plateadas" onclick="abrirModal('IMAGENES/zapatillasp.jpeg')" />
+    <h3>Zapatillas Plateadas</h3>
+    <p class="descripcion">Estilo femenino y juvenil con gran comodidad.</p>
+    <p class="precio">$400</p>
+    <div class="btn" onclick="abrirModal('imagenes/zapatillasp.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/trajerosa.jpeg" alt="Traje Rosa" onclick="abrirModal('IMAGENES/trajerosa.jpeg')" />
+    <h3>Traje Rosa</h3>
+    <p class="descripcion">Traje especial, cómodo y moderno.</p>
+    <p class="precio">$300</p>
+    <div class="btn" onclick="abrirModal('imagenes/trajerosa.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/vestidocafe.jpeg" alt="Vestido Café" onclick="abrirModal('IMAGENES/vestidocafe.jpeg')" />
+    <h3>Vestido Café</h3>
+    <p class="descripcion">Vestido casual elegante para cualquier ocasión.</p>
+    <p class="precio">$350</p>
+    <div class="btn" onclick="abrirModal('imagenes/vestidocafe.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/vestidorojo.jpeg" alt="Vestido Rojo" onclick="abrirModal('IMAGENES/vestidorojo.jpeg')" />
+    <h3>Vestido Rojo</h3>
+    <p class="descripcion">Vestido glamuroso que resalta elegancia y estilo.</p>
+    <p class="precio">$400</p>
+    <div class="btn" onclick="abrirModal('imagenes/vestidorojo.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/zapatillasrojas.jpeg" alt="Zapatillas Rojas" onclick="abrirModal('IMAGENES/zapatillasrojas.jpeg')" />
+    <h3>Zapatillas Rojas</h3>
+    <p class="descripcion">Zapatillas cómodas y modernas.</p>
+    <p class="precio">$450</p>
+    <div class="btn" onclick="abrirModal('imagenes/zapatillasrojas.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/pañueleta2.jpeg" alt="Pañoleta" onclick="abrirModal('IMAGENES/pañueleta2.jpeg')" />
+    <h3>Pañoleta</h3>
+    <p class="descripcion">Hermoso accesorio para el cabello.</p>
+    <p class="precio">$100</p>
+    <div class="btn" onclick="abrirModal('imagenes/pañueleta2.jpeg')">Ver</div>
+  </div>
+
+  <div class="producto">
+    <span class="favorito">❤</span>
+    <img src="imagenes/conjunto.jpeg" alt="Conjunto" onclick="abrirModal('IMAGENES/conjunto.jpeg')" />
+    <h3>Conjunto</h3>
+    <p class="descripcion">Conjunto hermoso, cómodo y moderno.</p>
+    <p class="precio">$500</p>
+    <div class="btn" onclick="abrirModal('imagenes/conjunto.jpeg')">Ver</div>
+  </div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal" onclick="cerrarModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="cerrar" onclick="cerrarModal()">×</span>
+    <img id="modal-img" src="" alt="Imagen ampliada" />
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 AR Glamour | Moda femenina con estilo</p>
+</footer>
+
+<script>
+  function abrirModal(src) {
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+    modalImg.src = src;
+    modal.style.display = "flex";
+  }
+
+  function cerrarModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    const modal = document.getElementById("modal");
+    if (event.target === modal) {
+      cerrarModal();
+    }
+  };
+</script>
+</body>
+</html>
